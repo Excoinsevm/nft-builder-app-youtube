@@ -4,7 +4,6 @@ import type { Chain } from "thirdweb";
 import "../styles/globals.css";
 
 export const bitrock: Chain = {
-  chain: "bitrock",
   name: "bitrock",
   chainId: 7171,
   rpc: "https://connect.bit-rock.io",
