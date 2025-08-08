@@ -8,7 +8,7 @@ import "../styles/globals.css";
 // You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
 const activeChain = defineChain({
   chainId: 7171,
-  chain: "Bitrock",
+  chain: "bitrock",
   name: "Bitrock Mainnet",
   shortName: "bitrock",
   slug: "bitrock",
@@ -17,8 +17,13 @@ const activeChain = defineChain({
     symbol: "BROCK",
     decimals: 18,
   },
-  rpc: ["https://connect.bit-rock.io"],  // Or your chain RPC URL
-  blockExplorers: [{ name: "Bitrock Explorer", url: "https://explorer.bit-rock.io" }],
+  rpc: ["https://connect.bit-rock.io"], // Replace with the actual RPC endpoint
+  blockExplorers: {
+    default: {
+      name: "Bitrock Explorer",
+      url: "https://explorer.bit-rock.io",
+    },
+  },
   testnet: false,
 });
 
