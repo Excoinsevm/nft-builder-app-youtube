@@ -8,10 +8,16 @@ const backgrounds= [
   '/bg3.png',
 ];
 
-const shapes = [
-  '/shape1.png',
-  '/shape2.png',
-  '/shape3.png',
+const body = [
+  '/body1.png',
+  '/body2.png',
+  '/body3.png',
+];
+
+const head = [
+  '/head1.png',
+  '/head2.png',
+  '/head3.png',
 ];
 
 const Home: NextPage = () => {
@@ -139,16 +145,32 @@ const Home: NextPage = () => {
           ))}
         </div>
         <div>
-          <h3>Select a shape:</h3>
-          {shapes.map((sh) => (
+          <h3>Select a body:</h3>
+          {body.map((sh) => (
             <img 
               key={sh}
               src={sh}
-              onClick={() => setShape(sh)}
+              onClick={() => setBody(sh)}
               style={{ 
                 width: '100px', 
                 cursor: 'pointer', 
-                border: shape === sh ? '2px solid royalblue' : '',
+                border: body === sh ? '2px solid royalblue' : '',
+                marginRight: '1rem',
+              }}
+            />
+          ))}
+        </div>
+        <div>
+          <h3>Select a head:</h3>
+          {head.map((sh) => (
+            <img 
+              key={sh}
+              src={sh}
+              onClick={() => setHead(sh)}
+              style={{ 
+                width: '100px', 
+                cursor: 'pointer', 
+                border: head === sh ? '2px solid royalblue' : '',
                 marginRight: '1rem',
               }}
             />
@@ -170,7 +192,7 @@ const Home: NextPage = () => {
             }}
           />
         </div>
-        {background && shape && nftName && (
+        {background && body && head && nftName && (
           <button
             style={{
               padding: '1rem',
