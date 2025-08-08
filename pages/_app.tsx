@@ -1,26 +1,18 @@
 import type { AppProps } from "next/app";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
-import type { Chain } from "thirdweb";
+import { bitrock } from "thirdweb/chains";
 import "../styles/globals.css";
 
-export const bitrock: Chain = {
-  name: "bitrock",
-  chainId: 7171,
-  rpc: "https://connect.bit-rock.io",
-  nativeCurrency: {
-    name: "BROCK",
-    symbol: "BROCK",
-    decimals: 18,
-  },
-  shortName: "custom",
-  slug: "bitrock",
-};
+// This is the chain your dApp will work on.
+// Change this to the chain your app is built for.
+// You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
+const activeChain = "bitrock";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider
       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
-      activeChain={bitrock}
+      activeChain={activeChain}
     >
       <Component {...pageProps} />
     </ThirdwebProvider>
