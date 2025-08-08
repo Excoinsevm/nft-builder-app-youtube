@@ -1,3 +1,16 @@
+/* Reset and global */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Container */
 .container {
   width: 100%;
   max-width: 1440px;
@@ -5,6 +18,7 @@
   margin: 0 auto;
 }
 
+/* Gradient Texts */
 .gradientText0 {
   background: -webkit-linear-gradient(#bfa3da, #84309c, #c735b0);
   -webkit-background-clip: text;
@@ -33,32 +47,31 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Title and Links */
 .title a:hover,
 .title a:focus,
 .title a:active {
   text-decoration: underline;
   text-decoration-color: #84309c;
+  outline: none; /* optionally add focus outline styling */
 }
 
 .title {
   line-height: 1.15;
   font-size: 4rem;
-}
-
-.title,
-.description {
   text-align: left;
 }
 
-.connect {
-  margin-bottom: 2rem;
-}
-
 .description {
+  text-align: left;
   margin-top: 2rem;
   margin-bottom: 2rem;
   line-height: 1.5;
   font-size: 1.5rem;
+}
+
+.connect {
+  margin-bottom: 2rem;
 }
 
 .code {
@@ -68,13 +81,16 @@
   font-size: 1.1rem;
 }
 
+/* Grid */
 .grid {
   display: flex;
-  justify-content: left;
+  justify-content: flex-start;  /* fixed */
   flex-wrap: wrap;
   gap: 20px;
+  width: 100%;
 }
 
+/* Cards */
 .card {
   background-color: #131313;
   text-align: left;
@@ -83,8 +99,8 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 440px;
-  overflow: none;
   border: none;
+  /* Removed overflow: none; (invalid) */
 }
 
 .cardText {
@@ -104,7 +120,7 @@
 .card:focus,
 .card:active {
   background-color: #272c34;
-  opacity: 80%;
+  opacity: 0.8; /* fixed */
 }
 
 .card h2 {
@@ -117,13 +133,26 @@
   line-height: 1.75;
 }
 
+/* Logo */
 .logo {
   height: 1em;
   margin-left: 0.5rem;
 }
 
+.logo img {
+  filter: invert(1);
+}
+
+/* Borders */
+.card,
+.footer {
+  border-color: #222;
+}
+
+/* Responsive */
+
+/* Tablet */
 @media (max-width: 1024px) {
-  /* Tablet */
   .container {
     padding: 0 0.75rem;
   }
@@ -132,13 +161,12 @@
   }
 }
 
+/* Large phones / small tablets */
 @media (max-width: 768px) {
-  /* Large phones / small tablets */
   .header {
     margin-left: 0;
   }
   .grid {
-    width: 100%;
     flex-direction: column;
     gap: 15px;
   }
@@ -156,8 +184,8 @@
   }
 }
 
+/* Small phones */
 @media (max-width: 480px) {
-  /* Small phones */
   .container {
     padding: 0 0.5rem;
   }
@@ -185,12 +213,4 @@
   .connect {
     margin-bottom: 1rem;
   }
-}
-
-.card,
-.footer {
-  border-color: #222;
-}
-.logo img {
-  filter: invert(1);
 }
