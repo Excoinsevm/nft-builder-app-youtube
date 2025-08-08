@@ -1,8 +1,8 @@
-import { defineChain } from "thirdweb";
+import { Chain } from "@thirdweb-dev/chains";
 
-export const bitrock = defineChain({
+export const bitrock: Chain = {
   chain: "bitrock",
-  name: "bitrock",
+  name: "Bitrock",
   chainId: 7171,
   rpc: ["https://connect.bit-rock.io"],
   nativeCurrency: {
@@ -13,6 +13,6 @@ export const bitrock = defineChain({
   shortName: "custom",
   testnet: false,
   slug: "bitrock",
-});
+};
 
 export default bitrock;
