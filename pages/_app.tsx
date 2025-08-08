@@ -1,12 +1,12 @@
 import type { AppProps } from "next/app";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
-import { bitrock } from "thirdweb/chains";
+import { defineChain } from "thirdweb/chains";
 import "../styles/globals.css";
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
 // You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-const activeChain = "bitrock";
+const activeChain = defineChain(7171);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
