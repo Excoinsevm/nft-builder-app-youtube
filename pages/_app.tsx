@@ -1,9 +1,9 @@
 import type { AppProps } from "next/app";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
-import { defineChain } from "thirdweb";
+import type { Chain } from "thirdweb";
 import "../styles/globals.css";
 
-export const bitrock = defineChain({
+export const bitrock: Chain = {
   chain: "bitrock",
   name: "bitrock",
   chainId: 7171,
@@ -16,7 +16,7 @@ export const bitrock = defineChain({
   shortName: "custom",
   testnet: false,
   slug: "bitrock",
-});
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
