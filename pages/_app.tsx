@@ -7,7 +7,7 @@ export const bitrock: Chain = {
   chain: "bitrock",
   name: "bitrock",
   chainId: 7171,
-  rpc: ["https://connect.bit-rock.io"],
+  rpc: "https://connect.bit-rock.io",
   nativeCurrency: {
     name: "BROCK",
     symbol: "BROCK",
