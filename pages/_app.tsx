@@ -6,7 +6,21 @@ import "../styles/globals.css";
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
 // You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-const activeChain = defineChain(7171);
+const activeChain = defineChain({
+  chainId: 7171,
+  chain: "Bitrock",
+  name: "Bitrock Mainnet",
+  shortName: "bitrock",
+  slug: "bitrock",
+  nativeCurrency: {
+    name: "Bitrock",
+    symbol: "BROCK",
+    decimals: 18,
+  },
+  rpc: ["https://connect.bit-rock.io"],  // Or your chain RPC URL
+  blockExplorers: [{ name: "Bitrock Explorer", url: "https://explorer.bit-rock.io" }],
+  testnet: false,
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
