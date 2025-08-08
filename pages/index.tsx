@@ -2,7 +2,7 @@ import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import { NextPage } from "next";
 import { useEffect, useRef, useState } from "react";
 
-const backgrounds= [
+const backgrounds = [
   '/bg1.png',
   '/bg2.png',
   '/bg3.png',
@@ -23,7 +23,7 @@ const backgrounds= [
   '/bg18.png',
 ];
 
-const body = [
+const bodyImages = [
   '/body1.png',
   '/body2.png',
   '/body3.png',
@@ -44,7 +44,7 @@ const body = [
   '/body18.png',
 ];
 
-const head = [
+const headImages = [
   '/head1.png',
   '/head2.png',
   '/head3.png',
@@ -101,43 +101,50 @@ const head = [
 const Home: NextPage = () => {
   const address = useAddress();
 
-  const [background, setBackground] = useState<string>('');
-  const [shape, setShape] = useState<string>('');
+  const [selectedBackground, setSelectedBackground] = useState<string>('');
+  const [selectedBody, setSelectedBody] = useState<string>('');
+  const [selectedHead, setSelectedHead] = useState<string>('');
   const [nftName, setNftName] = useState<string>('');
   const [isNFTMinting, setIsNFTMinting] = useState<boolean>(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if(!canvasRef.current) return;
-
+    if (!canvasRef.current) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    if(background && body && head && ctx) {
-      const backgroundImage = new globalThis.Image();
-      backgroundImage.onload = () => {
+    if (selectedBackground && selectedBody && selectedHead) {
+      const bgImg = new Image();
+      bgImg.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
 
-        const shapeImage = new globalThis.Image();
-        shapeImage.onload = () => {
-          ctx.drawImage(shapeImage, 0, 0, canvas.width, canvas.height);
+        const bodyImg = new Image();
+        bodyImg.onload = () => {
+          ctx.drawImage(bodyImg, 0, 0, canvas.width, canvas.height);
+
+          const headImg = new Image();
+          headImg.onload = () => {
+            ctx.drawImage(headImg, 0, 0, canvas.width, canvas.height);
+          };
+          headImg.src = selectedHead;
         };
-        shapeImage.src = shape;
+        bodyImg.src = selectedBody;
       };
-      backgroundImage.src = background;
+      bgImg.src = selectedBackground;
     }
-  }, [background, body, head]);
+  }, [selectedBackground, selectedBody, selectedHead]);
 
   const convertCanvasToBlob = () => {
     const canvas = canvasRef.current;
-    if(canvas) {
+    if (canvas) {
       canvas.toBlob((blob) => {
-        if(blob) {
+        if (blob) {
           sendNFTMintRequest(blob);
         }
-      }), 'image/png';
+      }, 'image/png');
     }
   };
 
@@ -153,134 +160,101 @@ const Home: NextPage = () => {
         method: 'POST',
         body: formData,
       });
-      
       const data = await response.json();
-
-      if(!response.ok) {
-        throw new Error(data.message);
-      }
-
+      if (!response.ok) throw new Error(data.message);
       alert('NFT minted successfully!');
     } catch (error) {
       console.error(error);
     } finally {
       setIsNFTMinting(false);
-      setBackground('');
-      setShape('');
+      setSelectedBackground('');
+      setSelectedBody('');
+      setSelectedHead('');
       setNftName('');
     }
   };
 
-  if(!address) {
-    return(
+  if (!address) {
+    return (
       <div style={{
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
+        display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'
       }}>
         <ConnectWallet />
       </div>
-    )
+    );
   }
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      justifyContent: 'center',
-      marginTop: '40px'
-    }}>
+    <div style={{ display: 'flex', marginTop: '40px', justifyContent: 'center' }}>
       <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        padding: '2rem',
-        backgroundColor: '#333',
-        borderRadius: '10px',
-        marginRight: '2rem',
+        display: 'flex', flexDirection: 'column', padding: '2rem',
+        backgroundColor: '#333', borderRadius: '10px', marginRight: '2rem',
       }}>
-        <ConnectWallet
-          style={{ width: '100%' }}
-        />
-        <div>
-          <h3>Select a background:</h3>
-          {backgrounds.map((bg) => (
-            <img 
-              key={bg}
-              src={bg}
-              onClick={() => setBackground(bg)}
-              style={{ 
-                width: '100px', 
-                cursor: 'pointer', 
-                border: background === bg ? '2px solid royalblue' : '',
-                marginRight: '1rem',
-              }}
-            />
-          ))}
-        </div>
-        <div>
-          <h3>Select a body:</h3>
-          {body.map((sh) => (
-            <img 
-              key={sh}
-              src={sh}
-              onClick={() => setBody(sh)}
-              style={{ 
-                width: '100px', 
-                cursor: 'pointer', 
-                border: body === sh ? '2px solid royalblue' : '',
-                marginRight: '1rem',
-              }}
-            />
-          ))}
-        </div>
-        <div>
-          <h3>Select a head:</h3>
-          {head.map((sh) => (
-            <img 
-              key={sh}
-              src={sh}
-              onClick={() => setHead(sh)}
-              style={{ 
-                width: '100px', 
-                cursor: 'pointer', 
-                border: head === sh ? '2px solid royalblue' : '',
-                marginRight: '1rem',
-              }}
-            />
-          ))}
-        </div>
-        <div style={{ width: '100%'}}>
-          <h3>Create a name:</h3>
-          <input 
-            type="text" 
-            placeholder="NFT name"
-            value={nftName}
-            onChange={(e) => setNftName(e.target.value)}
-            style={{ 
-              padding: '1rem', 
-              marginTop: '1rem',
-              border: '1px solid #ccc',
-              borderRadius: '5px',
-              width: '100%',
+        <ConnectWallet style={{ width: '100%' }} />
+
+        <h3>Select a background:</h3>
+        {backgrounds.map((bg) => (
+          <img
+            key={bg}
+            src={bg}
+            onClick={() => setSelectedBackground(bg)}
+            style={{
+              width: '100px',
+              cursor: 'pointer',
+              border: selectedBackground === bg ? '2px solid royalblue' : '',
+              marginRight: '1rem',
             }}
           />
-        </div>
-        {background && body && head && nftName && (
+        ))}
+
+        <h3>Select a body:</h3>
+        {bodyImages.map((b) => (
+          <img
+            key={b}
+            src={b}
+            onClick={() => setSelectedBody(b)}
+            style={{
+              width: '100px',
+              cursor: 'pointer',
+              border: selectedBody === b ? '2px solid royalblue' : '',
+              marginRight: '1rem',
+            }}
+          />
+        ))}
+
+        <h3>Select a head:</h3>
+        {headImages.map((h) => (
+          <img
+            key={h}
+            src={h}
+            onClick={() => setSelectedHead(h)}
+            style={{
+              width: '100px',
+              cursor: 'pointer',
+              border: selectedHead === h ? '2px solid royalblue' : '',
+              marginRight: '1rem',
+            }}
+          />
+        ))}
+
+        <h3>Create a name:</h3>
+        <input
+          type="text"
+          placeholder="NFT name"
+          value={nftName}
+          onChange={(e) => setNftName(e.target.value)}
+          style={{
+            padding: '1rem', marginTop: '1rem',
+            border: '1px solid #ccc', borderRadius: '5px', width: '100%',
+          }}
+        />
+
+        {selectedBackground && selectedBody && selectedHead && nftName && (
           <button
             style={{
-              padding: '1rem',
-              marginTop: '3rem',
-              cursor: 'pointer',
-              backgroundColor: 'royalblue',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              width: '100%',
+              padding: '1rem', marginTop: '3rem', cursor: 'pointer',
+              backgroundColor: 'royalblue', color: 'white',
+              border: 'none', borderRadius: '5px', width: '100%',
             }}
             disabled={isNFTMinting}
             onClick={convertCanvasToBlob}
@@ -289,8 +263,10 @@ const Home: NextPage = () => {
           </button>
         )}
       </div>
+
       <div>
-        <canvas ref={canvasRef} width="500" height="500" style={{ border: '1px solid black', marginTop: '20px' }}></canvas>
+        <canvas ref={canvasRef} width="500" height="500"
+          style={{ border: '1px solid black', marginTop: '20px' }} />
       </div>
     </div>
   );
