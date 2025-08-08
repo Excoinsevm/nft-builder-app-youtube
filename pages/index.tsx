@@ -6,18 +6,96 @@ const backgrounds= [
   '/bg1.png',
   '/bg2.png',
   '/bg3.png',
+  '/bg4.png',
+  '/bg5.png',
+  '/bg6.png',
+  '/bg7.png',
+  '/bg8.png',
+  '/bg9.png',
+  '/bg10.png',
+  '/bg11.png',
+  '/bg12.png',
+  '/bg13.png',
+  '/bg14.png',
+  '/bg15.png',
+  '/bg16.png',
+  '/bg17.png',
+  '/bg18.png',
 ];
 
 const body = [
   '/body1.png',
   '/body2.png',
   '/body3.png',
+  '/body4.png',
+  '/body5.png',
+  '/body6.png',
+  '/body7.png',
+  '/body8.png',
+  '/body9.png',
+  '/body10.png',
+  '/body11.png',
+  '/body12.png',
+  '/body13.png',
+  '/body14.png',
+  '/body15.png',
+  '/body16.png',
+  '/body17.png',
+  '/body18.png',
 ];
 
 const head = [
   '/head1.png',
   '/head2.png',
   '/head3.png',
+  '/head4.png',
+  '/head5.png',
+  '/head6.png',
+  '/head7.png',
+  '/head8.png',
+  '/head9.png',
+  '/head10.png',
+  '/head11.png',
+  '/head12.png',
+  '/head13.png',
+  '/head14.png',
+  '/head15.png',
+  '/head16.png',
+  '/head17.png',
+  '/head18.png',
+  '/head19.png',
+  '/head20.png',
+  '/head21.png',
+  '/head22.png',
+  '/head23.png',
+  '/head24.png',
+  '/head25.png',
+  '/head26.png',
+  '/head27.png',
+  '/head28.png',
+  '/head29.png',
+  '/head30.png',
+  '/head31.png',
+  '/head32.png',
+  '/head33.png',
+  '/head34.png',
+  '/head35.png',
+  '/head36.png',
+  '/head37.png',
+  '/head38.png',
+  '/head39.png',
+  '/head40.png',
+  '/head41.png',
+  '/head42.png',
+  '/head43.png',
+  '/head44.png',
+  '/head45.png',
+  '/head46.png',
+  '/head47.png',
+  '/head48.png',
+  '/head49.png',
+  '/head50.png',
+  '/head51.png',
 ];
 
 const Home: NextPage = () => {
@@ -36,7 +114,7 @@ const Home: NextPage = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    if(background && shape && ctx) {
+    if(background && body && head && ctx) {
       const backgroundImage = new globalThis.Image();
       backgroundImage.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -50,7 +128,7 @@ const Home: NextPage = () => {
       };
       backgroundImage.src = background;
     }
-  }, [background, shape]);
+  }, [background, body, head]);
 
   const convertCanvasToBlob = () => {
     const canvas = canvasRef.current;
