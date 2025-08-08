@@ -122,17 +122,68 @@
   margin-left: 0.5rem;
 }
 
+@media (max-width: 1024px) {
+  /* Tablet */
+  .container {
+    padding: 0 0.75rem;
+  }
+  .description {
+    font-size: 1.3rem;
+  }
+}
+
 @media (max-width: 768px) {
+  /* Large phones / small tablets */
   .header {
     margin-left: 0;
   }
   .grid {
     width: 100%;
     flex-direction: column;
+    gap: 15px;
+  }
+  .card {
+    max-width: 100%;
   }
   .title {
     font-size: 3rem;
     line-height: 1.15;
+  }
+  .description {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Small phones */
+  .container {
+    padding: 0 0.5rem;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .description {
+    font-size: 1rem;
+  }
+  .gradientText0,
+  .gradientText1,
+  .gradientText2,
+  .gradientText3 {
+    font-size: 1.5rem;
+  }
+  .cardText {
+    padding: 0.75rem;
+  }
+  .card h2 {
+    font-size: 1.25rem;
+  }
+  .card p {
+    font-size: 0.9rem;
+  }
+  .connect {
+    margin-bottom: 1rem;
   }
 }
 
