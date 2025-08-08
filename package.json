@@ -19,7 +19,8 @@
     "formidable": "^3.5.1",
     "next": "^13",
     "react": "^18.2",
-    "react-dom": "^18.2"
+    "react-dom": "^18.2",
+    "thirdweb": "^5.28.0"
   },
   "devDependencies": {
     "@types/formidable": "^3.4.5",
