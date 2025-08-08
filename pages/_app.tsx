@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
-import { bitrock } from "./chains";
+import { bitrock } from "./chain";
 import "../styles/globals.css";
 
 // This is the chain your dApp will work on.
