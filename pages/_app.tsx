@@ -14,7 +14,6 @@ export const bitrock: Chain = {
     decimals: 18,
   },
   shortName: "custom",
-  testnet: false,
   slug: "bitrock",
 };
 
