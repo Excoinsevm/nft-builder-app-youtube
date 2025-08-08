@@ -10,15 +10,15 @@ const bitrockChain: Chain = {
   chainId: 7171,
   chain: "bitrock",
   name: "Bitrock Mainnet",
-  shortName: "bitrock",
+  shortName: "brock",
   slug: "bitrock",
   nativeCurrency: {
     name: "Bitrock",
     symbol: "BROCK",
     decimals: 18,
   },
-  rpc: ["https://connect.bit-rock.io"], // Replace with the actual RPC endpoint
-  blockExplorers: {
+  rpc: ["https://connect.bit-rock.io"], // RPC endpoint
+  explorers: {
     default: {
       name: "Bitrock Explorer",
       url: "https://explorer.bit-rock.io",
