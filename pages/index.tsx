@@ -185,57 +185,118 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div style={{ display: 'flex', marginTop: '40px', justifyContent: 'center' }}>
-      <div style={{
-        display: 'flex', flexDirection: 'column', padding: '2rem',
-        backgroundColor: '#333', borderRadius: '10px', marginRight: '2rem',
-      }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: '40px',
+        justifyContent: 'center',
+        padding: '1rem',
+        gap: '2rem',
+
+        /* Responsive: stack vertically on small screens */
+        flexWrap: 'wrap',
+      }}
+    >
+      {/* Controls */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '1rem',
+          backgroundColor: '#333',
+          borderRadius: '10px',
+          minWidth: '280px',
+          flex: '1 1 300px',
+          maxWidth: '400px',
+          boxSizing: 'border-box',
+        }}
+      >
         <ConnectWallet style={{ width: '100%' }} />
 
         <h3>Select a background:</h3>
-        {backgrounds.map((bg) => (
-          <img
-            key={bg}
-            src={bg}
-            onClick={() => setSelectedBackground(bg)}
-            style={{
-              width: '100px',
-              cursor: 'pointer',
-              border: selectedBackground === bg ? '2px solid royalblue' : '',
-              marginRight: '1rem',
-            }}
-          />
-        ))}
+        <div
+          style={{
+            display: 'flex',
+            overflowX: 'auto',
+            gap: '0.5rem',
+            paddingBottom: '0.5rem',
+          }}
+        >
+          {backgrounds.map((bg) => (
+            <img
+              key={bg}
+              src={bg}
+              alt={`Background ${bg}`}
+              onClick={() => setSelectedBackground(bg)}
+              style={{
+                width: '80px',
+                height: '80px',
+                objectFit: 'cover',
+                cursor: 'pointer',
+                border: selectedBackground === bg ? '2px solid royalblue' : '2px solid transparent',
+                borderRadius: '6px',
+                flexShrink: 0,
+              }}
+            />
+          ))}
+        </div>
 
         <h3>Select a body:</h3>
-        {bodyImages.map((b) => (
-          <img
-            key={b}
-            src={b}
-            onClick={() => setSelectedBody(b)}
-            style={{
-              width: '100px',
-              cursor: 'pointer',
-              border: selectedBody === b ? '2px solid royalblue' : '',
-              marginRight: '1rem',
-            }}
-          />
-        ))}
+        <div
+          style={{
+            display: 'flex',
+            overflowX: 'auto',
+            gap: '0.5rem',
+            paddingBottom: '0.5rem',
+          }}
+        >
+          {bodyImages.map((b) => (
+            <img
+              key={b}
+              src={b}
+              alt={`Body ${b}`}
+              onClick={() => setSelectedBody(b)}
+              style={{
+                width: '80px',
+                height: '80px',
+                objectFit: 'cover',
+                cursor: 'pointer',
+                border: selectedBody === b ? '2px solid royalblue' : '2px solid transparent',
+                borderRadius: '6px',
+                flexShrink: 0,
+              }}
+            />
+          ))}
+        </div>
 
         <h3>Select a head:</h3>
-        {headImages.map((h) => (
-          <img
-            key={h}
-            src={h}
-            onClick={() => setSelectedHead(h)}
-            style={{
-              width: '100px',
-              cursor: 'pointer',
-              border: selectedHead === h ? '2px solid royalblue' : '',
-              marginRight: '1rem',
-            }}
-          />
-        ))}
+        <div
+          style={{
+            display: 'flex',
+            overflowX: 'auto',
+            gap: '0.5rem',
+            paddingBottom: '0.5rem',
+          }}
+        >
+          {headImages.map((h) => (
+            <img
+              key={h}
+              src={h}
+              alt={`Head ${h}`}
+              onClick={() => setSelectedHead(h)}
+              style={{
+                width: '80px',
+                height: '80px',
+                objectFit: 'cover',
+                cursor: 'pointer',
+                border: selectedHead === h ? '2px solid royalblue' : '2px solid transparent',
+                borderRadius: '6px',
+                flexShrink: 0,
+              }}
+            />
+          ))}
+        </div>
 
         <h3>Create a name:</h3>
         <input
@@ -244,17 +305,27 @@ const Home: NextPage = () => {
           value={nftName}
           onChange={(e) => setNftName(e.target.value)}
           style={{
-            padding: '1rem', marginTop: '1rem',
-            border: '1px solid #ccc', borderRadius: '5px', width: '100%',
+            padding: '0.75rem',
+            marginTop: '0.5rem',
+            border: '1px solid #ccc',
+            borderRadius: '5px',
+            width: '100%',
+            boxSizing: 'border-box',
           }}
         />
 
         {selectedBackground && selectedBody && selectedHead && nftName && (
           <button
             style={{
-              padding: '1rem', marginTop: '3rem', cursor: 'pointer',
-              backgroundColor: 'royalblue', color: 'white',
-              border: 'none', borderRadius: '5px', width: '100%',
+              padding: '1rem',
+              marginTop: '2rem',
+              cursor: 'pointer',
+              backgroundColor: 'royalblue',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              width: '100%',
+              fontSize: '1rem',
             }}
             disabled={isNFTMinting}
             onClick={convertCanvasToBlob}
@@ -264,9 +335,31 @@ const Home: NextPage = () => {
         )}
       </div>
 
-      <div>
-        <canvas ref={canvasRef} width="500" height="500"
-          style={{ border: '1px solid black', marginTop: '20px' }} />
+      {/* Canvas Preview */}
+      <div
+        style={{
+          flex: '1 1 320px',
+          maxWidth: '500px',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          boxSizing: 'border-box',
+          marginTop: '1rem',
+        }}
+      >
+        <canvas
+          ref={canvasRef}
+          width={500}
+          height={500}
+          style={{
+            border: '1px solid black',
+            maxWidth: '100%',
+            height: 'auto',
+            borderRadius: '10px',
+            backgroundColor: '#fff',
+          }}
+        />
       </div>
     </div>
   );
